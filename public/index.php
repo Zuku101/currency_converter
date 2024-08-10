@@ -1,4 +1,14 @@
 <?php
+
+/**
+ * @file
+ * Currencyy Converter
+ */
+
+/**
+ * Initializes the session and handles currency conversion requests.
+ */
+
 session_start();
 
 require_once "../src/require.php";
@@ -23,6 +33,9 @@ if (!isset($_SESSION["conversions"])) {
   $_SESSION["conversions"] = [];
 }
 
+/**
+ * @todo Refactor conversion process into a separate function or class to improve modularity and readability.
+ */
 if (isset($_POST["convert"])) {
   if (empty($amount) || $amount <= 0) {
     $errorMsg = "Proszę wprowadzić kwotę większą od zera.";
@@ -36,6 +49,10 @@ if (isset($_POST["convert"])) {
       $_SESSION["selectedFrom"],
       $_SESSION["selectedTo"]
     );
+
+    /**
+     * @todo Move database interaction to a dedicated data access layer.
+     */
     $stmt = $pdo->prepare(
       "INSERT INTO conversions (from_currency, to_currency, amount, converted_amount, conversion_rate) VALUES (?, ?, ?, ?, ?)"
     );

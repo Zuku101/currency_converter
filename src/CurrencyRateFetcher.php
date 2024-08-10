@@ -1,9 +1,28 @@
 <?php
 
-class CurrencyRateFetcher {
-  private $apiUrl = "http://api.nbp.pl/api/exchangerates/tables/A?format=json";
+/**
+ * @file
+ * Fetches currency exchange rates from the NBP API.
+ */
 
-  public function getRates() {
+/**
+ * CurrencyRateFetcher retrieves and processes currency rate data from NBP.
+ */
+class CurrencyRateFetcher {
+
+  /**
+   * @var string 
+   *   API URL to fetch currency rates.
+   */
+  private string $apiUrl = "http://api.nbp.pl/api/exchangerates/tables/A?format=json";
+
+  /**
+   * Fetches and returns currency rates including PLN.
+   *
+   * @return array 
+   *   List of currency rates with PLN added.
+   */
+  public function getRates(): array {
     $ch = curl_init($this->apiUrl);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $response = curl_exec($ch);
@@ -20,7 +39,13 @@ class CurrencyRateFetcher {
     return $rates;
   }
 
-  public function getCurrencies() {
+  /**
+   * Returns a simplified list of currency codes and names.
+   *
+   * @return array 
+   *   List of currencies.
+   */
+  public function getCurrencies(): array {
     $rates = $this->getRates();
     return array_map(function ($rate) {
       return [
@@ -29,5 +54,4 @@ class CurrencyRateFetcher {
       ];
     }, $rates);
   }
-  
 }
