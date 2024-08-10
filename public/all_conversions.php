@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @file All conversions.
+ */
+
+/**
+ * Fetch and display all currency conversions.
+ */
 session_start();
 require_once "../src/require.php";
 
