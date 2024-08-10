@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-require_once '../src/require.php';
+require_once "../src/require.php";
 
 $db = new Database();
 $pdo = $db->getPDO();
@@ -11,4 +11,4 @@ $stmt = $pdo->prepare($query);
 $stmt->execute();
 $conversions = $stmt->fetchAll();
 
-include '../templates/all_conversions_template.php';
+include "../templates/all_conversions_template.php";
