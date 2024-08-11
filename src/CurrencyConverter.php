@@ -47,14 +47,14 @@ class CurrencyConverter {
     }
 
     if ($fromCurrency === "PLN") {
-      return $amount * $toRate;
+      return $amount / $toRate;
     } 
     elseif ($toCurrency === "PLN") {
-      return $amount / $fromRate;
+      return $amount * $fromRate;
     } 
     else {
-      $amountInPLN = $amount / $fromRate;
-      return $amountInPLN * $toRate;
+      $amountInPLN = $amount / $toRate;
+      return $amountInPLN * $fromRate;
     }
   }
 
